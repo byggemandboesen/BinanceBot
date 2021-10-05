@@ -1,0 +1,23 @@
+{
+    "Coins":{
+        "All": true,
+        "BTC": false,
+        "ETH": false,
+        "BNB": false,
+        "ADA": false,
+        "XRP": false,
+        "DOT": false,
+        "SOL": false,
+        "DOGE": false
+    },
+    "Preferences":{
+        "TakeProfit": 1.0,
+        "MaxLoss": 15.0,
+        "Interval": 5.0,
+        "KeepDatapoints": 1000
+    },
+    "Secrets":{
+        "APIKey": "<Insert-Key-Here>",
+        "SecretKey": "<Insert-Secret-Key"
+    }
+}
