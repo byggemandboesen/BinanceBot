@@ -1,23 +1,15 @@
 {
-    "Coins":{
-        "All": true,
-        "BTC": false,
-        "ETH": false,
-        "BNB": false,
-        "ADA": false,
-        "XRP": false,
-        "DOT": false,
-        "SOL": false,
-        "DOGE": false
-    },
-    "Preferences":{
-        "TakeProfit": 1.0,
+    "Symbol": "BNBBUSD",
+    "Parameters":{
+        "TakeProfit": 0.3,
         "MaxLoss": 15.0,
-        "Interval": 5.0,
-        "KeepDatapoints": 1000
+        "StopLoss": 0.5,
+        "Oversold": 30,
+        "Overbought": 70,
+        "KLineInterval": "1m"
     },
     "Secrets":{
         "APIKey": "<Insert-Key-Here>",
-        "SecretKey": "<Insert-Secret-Key"
+        "SecretKey": "<Insert-Secret-Key>"
     }
 }
