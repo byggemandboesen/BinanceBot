@@ -1,4 +1,4 @@
 websocket-client==1.2.1
-python-binance==1.0.15
+ccxt==1.58.9
 numpy==1.21.1
 ta==0.7.0

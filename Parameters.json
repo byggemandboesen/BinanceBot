@@ -1,8 +1,9 @@
 {
-    "Symbol": "BNBBUSD",
+    "Coin": "BTC",
+    "Fund": "BUSD",
     "Parameters":{
         "TakeProfit": 0.3,
-        "MaxLoss": 15.0,
+        "MaxLoss": 5.0,
         "StopLoss": 0.5,
         "Oversold": 30,
         "Overbought": 70,
