@@ -99,9 +99,6 @@ class Bot:
         self.clear()
         print("Receiving data...")
         message = json.loads(message)["k"]
-
-        # Get market depth
-        depth = self.client.fetch_l2_order_book(self.SYMBOL_CCXT)
         
         data = [
             pd.to_datetime(message["t"], unit = "ms"),
