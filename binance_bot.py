@@ -96,11 +96,21 @@ class Bot:
     
     # Callback function for websocket, when message is received
     def onMessage(self, ws, message):
-        # self.clear()
+        self.clear()
         print("Receiving data...")
         message = json.loads(message)["k"]
+
+        # Get market depth
+        depth = self.client.fetch_l2_order_book(self.SYMBOL_CCXT)
         
-        data = [pd.to_datetime(message["t"], unit = "ms"), message["o"], message["h"], message["l"], message["c"], message["v"]]
+        data = [
+            pd.to_datetime(message["t"], unit = "ms"),
+            message["o"],
+            message["h"],
+            message["l"],
+            message["c"],
+            message["v"],
+            ]
 
         # Check if candle is already in dataframe then update data, otherwise add it and remove old row
         if data[0] in self.df["Open time"].values:
@@ -114,7 +124,9 @@ class Bot:
             self.df.reset_index(drop = True, inplace = True)
 
             self.analyzer.doAnalysis(self.df)
-    
+        
+        # Drop calculated columns. Yes I know, stupid but fixes errors when updating df with new data
+        self.df = self.df.dropna(axis = 1)
 
     # Clear console for new dataframe printout update
     def clear(self):
