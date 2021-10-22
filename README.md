@@ -1,6 +1,6 @@
 # BinanceBot
 Crypto trading bot using the python-binance API <br>
-***NOTE!!! I'M NOT RESPONSIBLE FOR ANY MONEY THAT MAY BE LOST USING THIS BOT! <br>
+***NOTE!!! I'M NOT RESPONSIBLE FOR ANY MONEY THAT MAY BE LOST USING THIS BOT!*** <br>
 Also note, that the bot is still under development and will actually not perform any trades yet.
 
 ## Installing
