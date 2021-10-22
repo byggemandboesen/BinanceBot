@@ -33,7 +33,7 @@ Below is an example of what a config file might look like at this current moment
     }
 }
 ~~~
-What everything means
+What everything means <br>
 Markup : *Symbol = Coins you wish to trade. NOTE! Keep BNB in your wallet for [lower fees](https://www.binance.us/en/fee/schedule).
 *Parameters
     *TakeProfit = The increase at which you want you to sell above.
