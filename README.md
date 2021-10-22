@@ -34,16 +34,16 @@ Below is an example of what a config file might look like at this current moment
 }
 ~~~
 What everything means <br>
-Markup : *Symbol = Coins you wish to trade. NOTE! Keep BNB in your wallet for [lower fees](https://www.binance.us/en/fee/schedule).
-*Parameters
-    *TakeProfit = The increase at which you want you to sell above.
-    *MaxLoss = The maximum percentage you are willing to loose before selling.
-    *StopLoss = How far below current price should trailing stop-loss be?
-    *OverSold = The RSI value at which the symbol is considered oversold.
-    *OverBought = The RSI value at which the symbol is considered overbought.
-    *KLineInterval = The interval of each candlestick. NOTE! String, as from [this list](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md#klinecandlestick-streams).
-*Secrets
-    *APIKey = Your API key.
-    *SecretKey = Your secret key.
+* Symbol = Coins you wish to trade. NOTE! Keep BNB in your wallet for [lower fees](https://www.binance.us/en/fee/schedule).
+* Parameters
+    * TakeProfit = The increase at which you want you to sell above.
+    * MaxLoss = The maximum percentage you are willing to loose before selling.
+    * StopLoss = How far below current price should trailing stop-loss be?
+    * OverSold = The RSI value at which the symbol is considered oversold.
+    * OverBought = The RSI value at which the symbol is considered overbought.
+    * KLineInterval = The interval of each candlestick. NOTE! String, as from [this list](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md#klinecandlestick-streams).
+* Secrets
+    * APIKey = Your API key.
+    * SecretKey = Your secret key.
 
 
