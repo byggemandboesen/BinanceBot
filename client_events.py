@@ -12,10 +12,9 @@ class Account:
         return free_balance
 
     # Places order on coin in chosen symbol
-    def placeOrder(self, symbol):
-        print("Order placed")
+    def placeOrder(self, symbol, type):
+        print(f"Order placed on {symbol}, type: {type}")
         # TODO If order is succesful return XXXX else return ERROR
-
 
 # NOTE! Place limit orders if possible. Otherwise 0.5% fees instead of 0.1%
 # NOTE! Keep BNB funds available for lower fees

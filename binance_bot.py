@@ -26,9 +26,9 @@ class Bot:
     def runBot(self):
         
         # Initiate an account from API- and secret key
-        account = Account(self.client)
+        self.account = Account(self.client)
         # Checks for available funds        
-        free_funds, already_owned = self.checkFunds(account)
+        free_funds, already_owned = self.checkFunds()
         
         # Get historical klines
         historic_klines = self.getKlines()
@@ -40,10 +40,10 @@ class Bot:
         websocket = self.openSocket()
 
     # Checks for available funds in account
-    def checkFunds(self, account):
+    def checkFunds(self):
         print("Checking for available funds...")
-        free_funds = account.getBalance(self.FUND)
-        already_owned = account.getBalance(self.COIN)
+        free_funds = self.account.getBalance(self.FUND)
+        already_owned = self.account.getBalance(self.COIN)
         print(f"Free funds available = {free_funds}{self.FUND}")
         print(f"Coins already owned = {already_owned}{self.COIN}")
         
@@ -96,7 +96,7 @@ class Bot:
     
     # Callback function for websocket, when message is received
     def onMessage(self, ws, message):
-        self.clear()
+        # self.clear()
         print("Receiving data...")
         message = json.loads(message)["k"]
         
@@ -113,14 +113,21 @@ class Bot:
         if data[0] in self.df["Open time"].values:
             self.df.iloc[[-1]] = data
             
-            self.analyzer.doAnalysis(self.df)
+            response = self.analyzer.doAnalysis(self.df)
         else:
             self.df.drop(self.df.head(1).index, inplace = True)
             df_length = len(self.df)
             self.df.loc[df_length + 1] = data
             self.df.reset_index(drop = True, inplace = True)
 
-            self.analyzer.doAnalysis(self.df)
+            response = self.analyzer.doAnalysis(self.df)
+
+        # If bot should buy or sell, do so
+        print(response)
+        if response == "BUY":
+            self.account.placeOrder(self.SYMBOL_CCXT, "BUY")
+        elif response == "SELL":
+            self.account.placeOrder(self.SYMBOL_CCXT, "SELL")
         
         # Drop calculated columns. Yes I know, stupid but fixes errors when updating df with new data
         self.df = self.df.dropna(axis = 1)

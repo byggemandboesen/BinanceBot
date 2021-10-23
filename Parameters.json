@@ -2,10 +2,10 @@
     "Coin": "BTC",
     "Fund": "BUSD",
     "Parameters":{
-        "TakeProfit": 0.3,
-        "MaxLoss": 5.0,
+        "TakeProfit": 0.7,
         "StopLoss": 0.5,
-        "Oversold": 30,
+        "TrailingStop": 0.2,
+        "Oversold": 25,
         "Overbought": 70,
         "KLineInterval": "1m"
     },
