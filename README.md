@@ -1,5 +1,5 @@
 # BinanceBot
-Crypto trading bot using the python-binance API <br>
+Crypto trading bot using the python-binance with CCXT API <br>
 ***NOTE!!! I'M NOT RESPONSIBLE FOR ANY MONEY THAT MAY BE LOST USING THIS BOT!*** <br>
 Also note, that the bot is still under development and will actually not perform any trades yet.
 
@@ -50,4 +50,6 @@ What everything means <br>
     * APIKey = Your API key.
     * SecretKey = Your secret key.
 
-
+## TODO
+* Improve buy/sell indication
+* Test bot!
