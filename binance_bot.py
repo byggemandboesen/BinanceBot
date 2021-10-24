@@ -4,6 +4,7 @@ import pandas as pd
 # File imports
 from client_events import Account
 from analysis import Analyzer
+import logger
 
 SOCKET_PREFIX = "wss://stream.binance.com:9443/ws/"
 
@@ -20,13 +21,12 @@ class Bot:
 
         self.APIKEY = config["Secrets"]["APIKey"]
         self.SECRETKEY = config["Secrets"]["SecretKey"]
-        self.client = ccxt.binance({"apiKey": self.APIKEY, "secret": self.SECRETKEY}) # Change to bybit!!
     
     # Main bot loop
     def runBot(self):
         
         # Initiate an account from API- and secret key
-        self.account = Account(self.client)
+        self.account = Account(self.APIKEY, self.SECRETKEY, self.SYMBOL_CCXT)
         # Checks for available funds        
         free_funds, already_owned = self.checkFunds()
         
@@ -56,12 +56,8 @@ class Bot:
         return free_funds, already_owned
 
     # Gets historical klines two hours back in time
-    def getKlines(self, limit =180):
-        klines = self.client.fetch_ohlcv(
-            symbol = self.SYMBOL_CCXT,
-            timeframe = self.KLINE_INTERVAL,
-            limit = limit, # Number of candles to retrieve
-        )
+    def getKlines(self):
+        klines = self.account.getKlines(self.SYMBOL_CCXT, self.KLINE_INTERVAL)
         
         # Create pandas dataframe for ease of use
         df = pd.DataFrame(klines, columns = [
@@ -122,13 +118,20 @@ class Bot:
 
             response = self.analyzer.doAnalysis(self.df)
 
+        try:
         # If bot should buy or sell, do so
-        print(response)
-        if response == "BUY":
-            self.account.placeOrder(self.SYMBOL_CCXT, "BUY")
-        elif response == "SELL":
-            self.account.placeOrder(self.SYMBOL_CCXT, "SELL")
-        
+            print(response)
+            if response == "BUY":
+                order = self.account.placeOrder(self.SYMBOL_CCXT, "buy", self.df["Close"].iloc[-1])
+                #Add order to logger
+                logger.addOrder(order)
+            elif response == "SELL":
+                order = self.account.placeOrder(self.SYMBOL_CCXT, "sell", self.df["Close"].iloc[-1])
+                logger.addOrder(order)
+            
+        except Exception as e:
+            print(e)
+
         # Drop calculated columns. Yes I know, stupid but fixes errors when updating df with new data
         self.df = self.df.dropna(axis = 1)
 

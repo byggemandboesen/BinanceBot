@@ -83,7 +83,7 @@ class Analyzer:
         if price <= self.Stop:
             self.OpenPosition = False
             profit = (price - self.BuyPrice) / self.BuyPrice
-            return f"STOPLOSS HIT, SELLING AT {round(profit, 4)}% PROFIT"
+            return f"SELL"
         elif price > self.Target:
             self.Stop = price # if price < self.TakeProfit * (1 + self.TrailingStop) else price * (1 - self.TrailingStop)
             return f"Trailing stoploss set to = {self.Stop}"
