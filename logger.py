@@ -17,6 +17,8 @@ def addOrder(order):
             log_file.seek(0)
             json.dump(file, log_file, indent = 4)
     else:
+        if not os.path.isdir("LogFiles"):
+            os.mkdir("LogFiles")
         with open(log_path, "w") as log_file:
             data = {"Orders": [parsed_order]}
             json.dump(data, log_file, indent = 4)
